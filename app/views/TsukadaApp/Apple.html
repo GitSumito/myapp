@@ -1,11 +1,16 @@
-{{set . "title" "Home"}}
-{{template "header.html" .}}
-
 <header class="jumbotron" style="background-color:#A9316C">
   <div class="container">
     <div class="row">
       <h1>APPLe tsukada App</h1>
-      <h1>{{.rows}}</h1>
+
+      <table border>
+      {{range .people}}
+      <tr>
+        <td>{{.Id}}</td>
+        <td>{{.Name}}</td>
+      </tr>
+      {{end}}
+      </table>
 
       <p></p>
     </div>

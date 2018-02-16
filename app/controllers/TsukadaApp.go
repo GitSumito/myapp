@@ -13,7 +13,7 @@ type TsukadaApp struct {
 }
 
 type User struct {
-    ID   int    `db:"id"`
+    Id   int    `db:"id"`
     Name string `db:"name"`
 }
 
@@ -24,7 +24,7 @@ func (c TsukadaApp) Index() revel.Result {
 
 func (c TsukadaApp) Apple() revel.Result {
 
-    db, err := sqlx.Connect("mysql", "root:passwordPASSWORDpasswordPASSWORD@(localhost:3306)/booking")
+    db, err := sqlx.Connect("mysql", "root:password@(localhost:3306)/booking")
     if err != nil {
         log.Fatalln(err)
     }
@@ -40,16 +40,12 @@ func (c TsukadaApp) Apple() revel.Result {
     fmt.Printf("%#v\n%#v\n", jason, john)
 
 
-//    defer rows.Close()
-    for people.Next() {
-        user := User{}
-//        err = rows.StructScan(&user)
-
-
-        log.Println(user)
-        log.Println(err)
+    for i :=0; i <len(people); i++ {
+        fmt.Println(people[i], " ", people[i].Id, " ", people[i].Name, " ")
     }
-    return c.Render(jason)
+
+
+    return c.Render(people)
 }
 
 
