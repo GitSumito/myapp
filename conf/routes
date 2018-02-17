@@ -13,6 +13,7 @@ GET     /tsukadaApple                           TsukadaApp.Apple
 
 #GET     /login                                  Login.Index
 POST     /login                                  Login.Index
+POST     /Useradd                                Useradd.Index
 #GET     /book                                   Book.Index
 #GET     /check                                  Check.Index
 #GET     /Menu                                   Menu.Index
@@ -25,6 +26,7 @@ GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/*filepath                       Static.Serve("public")
+GET     /*filepath                              Static.Serve("public")
 
 # Catch all, this will route any request into the controller path
 #
