@@ -12,7 +12,7 @@ type TsukadaApp struct {
 	*revel.Controller
 }
 
-type User struct {
+type UserInfomation struct {
     Id   int    `db:"id"`
     Name string `db:"name"`
 }
@@ -29,7 +29,7 @@ func (c TsukadaApp) Apple() revel.Result {
         log.Fatalln(err)
     }
 
-    people := []User{}
+    people := []UserInfomation{}
     err = db.Select(&people, "SELECT id, name From patient;")
     if err != nil {
         fmt.Println(err)

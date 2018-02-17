@@ -11,6 +11,15 @@ GET     /                                       App.Index
 GET     /tsukada                                TsukadaApp.Index
 GET     /tsukadaApple                           TsukadaApp.Apple
 
+#GET     /login                                  Login.Index
+POST     /login                                  Login.Index
+#GET     /book                                   Book.Index
+#GET     /check                                  Check.Index
+#GET     /Menu                                   Menu.Index
+#GET     /Useradd                                Useradd.Index
+#GET     /Confirm                                Confirm.Index
+
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
