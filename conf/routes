@@ -7,18 +7,19 @@ module:testrunner
 # module:jobs
 
 
-GET     /                                       App.Index
-GET     /tsukada                                TsukadaApp.Index
-GET     /tsukadaApple                           TsukadaApp.Apple
 
-#GET     /login                                  Login.Index
-POST     /login                                  Login.Index
-POST     /Useradd                                Useradd.Index
-#GET     /book                                   Book.Index
-#GET     /check                                  Check.Index
-#GET     /Menu                                   Menu.Index
-#GET     /Useradd                                Useradd.Index
-#GET     /Confirm                                Confirm.Index
+# Pacient
+GET     /                                       Patient.Index
+#GET    /login                                  Patient.Login
+
+# Admin
+GET     /admin                                  Admin.Index
+POST    /adduser                                Admin.Adduser
+GET    /menu                                   Admin.Menu
+
+
+#GET     /tsukada                                TsukadaApp.Index
+#GET     /tsukadaApple                           TsukadaApp.Apple
 
 
 # Ignore favicon requests

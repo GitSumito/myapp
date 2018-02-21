@@ -31,7 +31,7 @@ func (c Login) Index(Id int, Password int) revel.Result {
 	if c.Validation.HasErrors() {
 		c.Validation.Keep()
 		c.FlashParams()
-		return c.Redirect(App.Index)
+		return c.Redirect(Patient.Index)
 	}
 
 	d := UserLogin(Id, Password)
@@ -41,7 +41,7 @@ func (c Login) Index(Id int, Password int) revel.Result {
 
 func UserLogin(Id int, Password int) []User {
 
-	db, err := connect()
+	db, err := Connect()
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -59,7 +59,7 @@ func UserLogin(Id int, Password int) []User {
 	return people
 }
 
-func connect() (*sqlx.DB, error) {
+func Connect() (*sqlx.DB, error) {
 	return sqlx.Connect("mysql", "root:password@(localhost:3306)/booking")
 }
 

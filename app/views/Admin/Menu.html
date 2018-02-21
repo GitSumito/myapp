@@ -1,0 +1,38 @@
+{{set . "title" "Home"}}
+{{template "header.html" .}}
+
+<header class="jumbotron" style="background-color:#A9F16C">
+  <div class="container">
+    <div class="row">
+      <h1>It works!</h1>
+      <p></p>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+adduser
+<form action="/adduser" method="POST">
+    <input type="text" name="Id" /><br/>
+    <input type="text" name="Name" /><br/>
+    <input type="text" name="Phone" /><br/>
+    <input type="text" name="Birthday" /><br/>
+    <input type="submit" value="add user" />
+</form>
+
+change
+<form action="/change" method="POST">
+    <input type="text" name="Id" /><br/>
+    <input type="text" name="Name" /><br/>
+    <input type="text" name="Phone" /><br/>
+    <input type="submit" value="add user" />
+</form>
+
+{{template "footer.html" .}}
