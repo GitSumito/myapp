@@ -1,10 +1,10 @@
 {{set . "title" "Home"}}
 {{template "header.html" .}}
 
-<header class="jumbotron" style="background-color:#F9F16C">
+<header class="jumbotron" style="background-color:#09F16C">
   <div class="container">
     <div class="row">
-      <h1>Index!</h1>
+      <h1>Choose!</h1>
       <p></p>
     </div>
   </div>
@@ -18,10 +18,15 @@
   </div>
 </div>
 
-<form action="/login" method="POST">
-    <input type="text" name="Id" /><br/>
-    <input type="text" name="Password" /><br/>
-    <input type="submit" value="login" />
+<form action="/confirm" method="POST">
+
+      {{range .people}}
+      <tr>
+        <td><a href="/confim?date={{.Timedate}}">{{.Timedate}}</a></td>
+      </tr>
+      {{end}}
+      </table>
+
 </form>
 
 {{template "footer.html" .}}
