@@ -1,7 +1,7 @@
 {{set . "title" "Home"}}
 {{template "header.html" .}}
 
-<header class="jumbotron" style="background-color:#09F16C">
+<header class="jumbotron" style="background-color:#00016C">
   <div class="container">
     <div class="row">
       <h1>Choose!</h1>
@@ -18,11 +18,12 @@
   </div>
 </div>
 
+kokokara
 <form action="/confirm" method="POST">
-
-      {{range .people}}
+<table border>
+      {{range .vacantTime}}
       <tr>
-        <td><a href="/confim?date={{.Timedate}}">{{.Timedate}}</a></td>
+        <td><a href="/confim?date={{.Datetime}}">{{.Datetime}}</a></td>
       </tr>
       {{end}}
       </table>

@@ -36,7 +36,7 @@ func (c Login) Index(Id int, Password int) revel.Result {
 		return c.Render()
 	}
 
-	d := UserLogin(Id, Password)
+	UserLogin(Id, Password)
 
 	return c.Render()
 }
@@ -62,5 +62,6 @@ func UserLogin(Id int, Password int) []User {
 }
 
 func Connect() (*sqlx.DB, error) {
+        fmt.Println("Trying to connect DB...")
 	return sqlx.Connect("mysql", "root:password@(localhost:3306)/booking")
 }

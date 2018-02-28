@@ -6,5 +6,6 @@ import (
 )
 
 func connect() (*sqlx.DB, error) {
+	fmt.Println("connect to DB")
 	return sqlx.Connect("mysql", "root:password@(localhost:3306)/booking")
 }

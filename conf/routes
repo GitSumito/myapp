@@ -10,7 +10,7 @@ module:testrunner
 
 # Pacient
 GET     /                                       Patient.Index
-GET    /login                                   Patient.Choose
+POST    /login                                   Patient.Login
 
 # Admin
 GET     /admin                                  Admin.Index
@@ -18,8 +18,8 @@ POST    /adduser                                Admin.Adduser
 GET    /menu                                   Admin.Menu
 
 
-#GET     /tsukada                                TsukadaApp.Index
-#GET     /tsukadaApple                           TsukadaApp.Apple
+GET     /tsukada                                TsukadaApp.Index
+GET     /tsukadaApple                           TsukadaApp.Apple
 
 
 # Ignore favicon requests
