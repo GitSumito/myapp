@@ -25,18 +25,20 @@ func (c Login) Index(Id int, Password int) revel.Result {
 	c.Validation.Required(Id).Message("IDを入力してください")
 	// c.Validation.MinSize(Id,3).Message("IDが正しいか確認してください")
 
-	c.Validation.Required(Password).Message( "電話番号を入力してください")
+	c.Validation.Required(Password).Message("電話番号を入力してください")
 	// c.Validation.MinSize(Password, 3).Message( "電話番号が正しいか確認してください")
 
 	if c.Validation.HasErrors() {
 		c.Validation.Keep()
 		c.FlashParams()
-		return c.Redirect(Patient.Index)
+		// リダイレクト先を変えたい。とりあえずこのまま
+		//	return c.Redirect(Patient.Index)
+		return c.Render()
 	}
 
 	d := UserLogin(Id, Password)
 
-	return c.Render(d)
+	return c.Render()
 }
 
 func UserLogin(Id int, Password int) []User {
@@ -62,4 +64,3 @@ func UserLogin(Id int, Password int) []User {
 func Connect() (*sqlx.DB, error) {
 	return sqlx.Connect("mysql", "root:password@(localhost:3306)/booking")
 }
-

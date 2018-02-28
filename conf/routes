@@ -10,7 +10,7 @@ module:testrunner
 
 # Pacient
 GET     /                                       Patient.Index
-#GET    /login                                  Patient.Choose
+GET    /login                                   Patient.Choose
 
 # Admin
 GET     /admin                                  Admin.Index

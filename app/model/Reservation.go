@@ -1,10 +1,6 @@
 package model
 
 import (
-	"fmt"
-	"github.com/revel/revel"
-	"gopkg.in/gorp.v2"
-	"regexp"
 	"time"
 )
 
