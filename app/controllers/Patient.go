@@ -5,6 +5,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/revel/revel"
 	"log"
+	"net/http"
 	"time"
 )
 
@@ -19,6 +20,9 @@ type PatientStruct struct {
 
 type Reservation struct {
 	Datetime      string `db:"datetime"`
+	Day           string `db:"day"`
+	Time          string `db:"time"`
+	Viewtime      string `db:"viewtime"`
 	Room          string `db:"room"`
 	Treat_time    string `db:"treat_time"`
 	Dr_no         string `db:"dr_no"`
@@ -61,7 +65,7 @@ func Choose(Id string) []Reservation {
 	datetime := ltime.Add(1 * time.Minute)
 	iikanji := datetime.Format(layout)
 
-	SQL := "select * from reservation where datetime >= " + "\"" + iikanji + "\"" + " and patient_id = 0 order by datetime limit 3;"
+	SQL := "select *, DATE_FORMAT(datetime, '%Y%m%d') as day, DATE_FORMAT(datetime, '%H%i%s') as time, DATE_FORMAT(datetime, '%Y年%m月%d日 %H時%i分') as viewtime from reservation where datetime >= " + "\"" + iikanji + "\"" + " and patient_id = 0 order by datetime limit 3;"
 	fmt.Println(SQL)
 	err = db.Select(&bookableSlot, SQL)
 
@@ -112,5 +116,39 @@ func (c Patient) Login(id string, password string, remember bool) revel.Result {
 	vacantTime := Choose(id)
 	fmt.Println(len(vacantTime))
 
+	new_cookie := &http.Cookie{Name: "foo", Value: "Bar"}
+	c.SetCookie(new_cookie)
+
+	c.Session["aaaaaaaaa"] = "bar"
+	c.Session["bbbbbbbb"] = "1" // Error - value needs to be a string
+	//    delete(c.Session, "abc") // Removed item from session
+
 	return c.Render(vacantTime)
+}
+
+// ID/PW を元にログインする
+// TODO セッションを登録する Cookieを返す
+func (c Patient) Confirm(day string, time string) revel.Result {
+
+	fmt.Println("Pacient.Confirm")
+	confirm := Reservation{}
+
+	confirm.Day = day
+	confirm.Time = time
+
+	fmt.Println("day:" + day)
+	fmt.Println("time:" + time)
+
+	year := day[:4]
+	month := day[4:6]
+	dday := day[6:]
+
+	hour := time[:2]
+	min := time[2:4]
+
+	datetime := year + "年" + month + "月" + dday + "日" + " " + hour + "時" + min + "分〜"
+	fmt.Println(datetime)
+	confirm.Viewtime = datetime
+
+	return c.Render(confirm)
 }

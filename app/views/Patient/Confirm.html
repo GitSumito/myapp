@@ -18,13 +18,15 @@
   </div>
 </div>
 
-kokokara
+<form action="/confirm" method="POST">
 <table border>
-      {{range .vacantTime}}
+
+{{.confirm.Viewtime}}で予約とります	
       <tr>
-        <td><a href="/confirm?day={{.Day}}&time={{.Time}}">{{.Viewtime}}</a></td>
+        <td><a href="/done?day={{.confirm.Day}}&time={{.confirm.Time}}">OK</a></td>
       </tr>
-      {{end}}
       </table>
+
+</form>
 
 {{template "footer.html" .}}

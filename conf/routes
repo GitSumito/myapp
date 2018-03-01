@@ -11,6 +11,7 @@ module:testrunner
 # Pacient
 GET     /                                       Patient.Index
 POST    /login                                   Patient.Login
+GET     /confirm                                 Patient.Confirm
 
 # Admin
 GET     /admin                                  Admin.Index
