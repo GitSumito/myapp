@@ -109,21 +109,47 @@ func (c Patient) Login(id string, password string, remember bool) revel.Result {
 		c.Flash.Error("Login failed")
 		return c.Redirect("/")
 	} else {
-
 		fmt.Println("OK")
 	}
 
-	vacantTime := Choose(id)
-	fmt.Println(len(vacantTime))
+	SQL = "select datetime from reservation where patient_id = " + id + " order by datetime limit 1;"
+	fmt.Println(SQL)
 
+	rows, _ := db.Query(SQL)
+
+	var tmpst string
+
+	for rows.Next() {
+		err = rows.Scan(&tmpst)
+	}
+
+///
+
+        year := tmpst[:4]
+        month := tmpst[5:7]
+        dday := tmpst[8:10]
+
+        hour := tmpst[11:13]
+        min := tmpst[14:16]
+
+        Nexttime := year + "年" + month + "月" + dday + "日" + " " + hour + "時" + min + "分〜"
+
+
+
+
+///
+
+
+
+	fmt.Println(Nexttime)
+	vacantTime := Choose(id)
 	new_cookie := &http.Cookie{Name: "foo", Value: "Bar"}
 	c.SetCookie(new_cookie)
-
 	c.Session["aaaaaaaaa"] = "bar"
 	c.Session["bbbbbbbb"] = "1" // Error - value needs to be a string
 	//    delete(c.Session, "abc") // Removed item from session
 
-	return c.Render(vacantTime)
+	return c.Render(Nexttime, vacantTime)
 }
 
 // ID/PW を元にログインする
