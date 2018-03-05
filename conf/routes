@@ -17,6 +17,7 @@ GET     /confirm                                 Patient.Confirm
 GET     /admin                                  Admin.Index
 POST    /adduser                                Admin.Adduser
 GET    /menu                                   Admin.Menu
+GET    /list                                   Admin.List
 
 
 GET     /tsukada                                TsukadaApp.Index
