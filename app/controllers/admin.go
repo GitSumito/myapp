@@ -97,7 +97,8 @@ func Useradd(Id string, Name string, Phone string, Birthday string) {
 func (c Admin) List(day string) revel.Result {
 
 	fmt.Println("Admin.Date")
-	dshedule := []DaySchedule{}
+	dshedule1 := []DaySchedule{}
+	dshedule2 := []DaySchedule{}
 
 	yyyy := day[:4]
 	mm := day[4:6]
@@ -116,7 +117,7 @@ func (c Admin) List(day string) revel.Result {
 	end := "\"" + ymd + separator + endtime + "\""
 	fmt.Println(end)
 
-	SQL := "select " +
+	SQL1 := "select " +
 		"res.datetime, " +
 		"res.room, " +
 		"res.treat_time, " +
@@ -133,22 +134,45 @@ func (c Admin) List(day string) revel.Result {
 		"left outer join patient as p on res.patient_id = p.id " +
 		"left outer join assist as a on res.assist_no = a.id " +
 		" where datetime > " + start +
+		" and room = 1" +
 		" and  datetime < " +
 		end + " order by datetime;"
-	fmt.Println(SQL)
+	fmt.Println(SQL1)
+
+	SQL2 := "select " +
+		"res.datetime, " +
+		"res.room, " +
+		"res.treat_time, " +
+		"res.dr_no, " +
+		"res.assist_no, " +
+		"res.dr_weight, " +
+		"res.assist_weight, " +
+		"res.patient_id, " +
+		"s.name as dr_name, " +
+		"p.name as patient_name, " +
+		"a.name as assist_name " +
+		"from reservation as res " +
+		"left outer join staff as s on res.dr_no = s.id " +
+		"left outer join patient as p on res.patient_id = p.id " +
+		"left outer join assist as a on res.assist_no = a.id " +
+		" where datetime > " + start +
+		" and room = 2" +
+		" and  datetime < " +
+		end + " order by datetime;"
+	fmt.Println(SQL2)
 
 	db, err := Connect()
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	err = db.Select(&dshedule, SQL)
+	err = db.Select(&dshedule1, SQL1)
+	err = db.Select(&dshedule2, SQL2)
 
-	fmt.Println(len(dshedule))
+	//fmt.Println(len(dshedule))
+	//for i := 0; i < len(dshedule); i++ {
+	//	fmt.Println(dshedule[i], " ", dshedule[i].Datetime, " ", dshedule[i].Room, " ")
+	//}
 
-	for i := 0; i < len(dshedule); i++ {
-		fmt.Println(dshedule[i], " ", dshedule[i].Datetime, " ", dshedule[i].Room, " ")
-	}
-
-	return c.Render(dshedule)
+	return c.Render(dshedule1, dshedule2)
 }

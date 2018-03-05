@@ -20,11 +20,26 @@
 
 
 <table border>
-      {{range .dshedule}}
+<tr><td>
+	<table border>
+      {{range .dshedule1}}
       <tr>
         <td>{{.Datetime}} {{.Dr_name}} {{.Assist_name}} {{.Patient_name}}</td>
       </tr>
       {{end}}
-      </table>
+	</table>
+
+</td>
+<td>
+        <table border>
+      {{range .dshedule2}}
+      <tr>
+        <td>{{.Datetime}} {{.Dr_name}} {{.Assist_name}} {{.Patient_name}}</td>
+      </tr>
+      {{end}}
+        </table>
+<td>
+</tr>
+</table>
 
 {{template "footer.html" .}}
